@@ -40,3 +40,11 @@ source 'https://rubygems.org'
  end
 
  gem 'bootstrap-sass'
+
+ gem 'devise'
+
+ group :development, :test do
+   gem 'rspec-rails', '~> 3.5'
+ end
+
+ gem 'figaro', '1.0'
