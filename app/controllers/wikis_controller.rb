@@ -1,5 +1,6 @@
 class WikisController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
+  before_action :user_is_admin_or_wiki_owner?, only: :destroy
 
   def index
     @wikis = Wiki.all
@@ -59,5 +60,14 @@ class WikisController < ApplicationController
 
   def wiki_params
     params.require(:wiki).permit(:title, :body, :private)
+  end
+
+  def user_is_admin_or_wiki_owner?
+    wiki = Wiki.find(params[:id])
+
+    unless current_user.admin? || current_user == wiki.user
+      flash[:alert] = "You must be an admin to do that."
+      redirect_to wikis_path
+    end
   end
 end
