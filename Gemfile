@@ -50,3 +50,5 @@ source 'https://rubygems.org'
  end
 
  gem 'figaro', '1.0'
+
+ gem 'stripe'

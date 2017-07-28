@@ -5,37 +5,44 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-3.times do
-  User.create!(
-    email: Faker::Internet.email,
-    password: 'helloworld'
-  )
-end
+# 3.times do
+#   User.create!(
+#     email: Faker::Internet.email,
+#     password: 'helloworld'
+#   )
+# end
 
 standard = User.create!(
   email: 'standard@example.com',
-  password: 'helloworld'
+  password: '123456'
 )
 
 premium = User.create!(
   email: 'premium@example.com',
-  password: 'helloworld',
+  password: '123456',
   role: 'premium'
+)
+
+upgrading = User.create!(
+  email: 'upgrading@example.com',
+  password: '123456',
+  role: 'upgrading'
 )
 
 admin = User.create!(
   email:    'admin@example.com',
-  password: 'helloworld',
+  password: '123456',
   role: 'admin'
 )
 
 50.times do
-  Wiki.create!(
+  wiki = Wiki.create!(
     title: Faker::Lorem.sentence,
     body: Faker::Lorem.paragraph(10..80),
     private: [false, true, false].sample,
     user: User.all.sample
   )
+  wiki.update_attribute(:created_at, rand(5.minutes .. 1.week).ago)
 end
 
 puts "Seed finished"

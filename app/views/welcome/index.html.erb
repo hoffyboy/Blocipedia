@@ -1,14 +1,32 @@
 <br>
+<% if !user_signed_in? %>
   <div class="jumbotron">
-      <h2>Blocipedia: Social, Markdown Wikis</h2>
-      <p>Create and share Markdown Wikis with the world. Contribute to the wiki platform and become part of the community.</p>
-      <% if user_signed_in? %>
-        <%= link_to "Edit Profile", edit_user_registration_path, :class => "btn-md btn btn-primary"  %>
-      <% else %>
-        <%= link_to "Sign In", new_user_session_path , :class => "btn-md btn btn-primary"  %> or
-        <%= link_to "Sign Up", new_user_registration_path, :class => "btn-md btn btn-primary"  %>
-      <% end %>
+    <h1 class="text-center">New to Blocipedia?</h1>
+    <h2 class="text-center">Choose a plan to sign up!</h2>
+
+    <br>
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-1 text-center">
+        <h3 class="text-center">Create unlimited public wikis!</h3>
+        <br>
+        <%= link_to "Standard", new_user_registration_path, :class => "btn-lg btn btn-primary"  %>
+      </div>
+      <div class="col-sm-4  col-sm-offset-2 text-center">
+        <h3 class="text-center">Create public and private wikis!</h3>
+        <br>
+        <%= link_to "Premium", new_user_registration_path(role: 'premium'), :class => "btn-lg btn btn-primary"  %>
+      </div>
+    </div>
   </div>
+<% end %>
+  <div class="jumbotron">
+    <h1>Blocipedia</h1>
+    <p>Create and share Markdown Wikis with the world. Contribute to the wiki platform and become part of the community.</p>
+    <% if user_signed_in? %>
+      <%= link_to "Edit Profile", edit_user_registration_path, :class => "btn-md btn btn-primary"  %>
+    <% end %>
+  </div>
+  <br>
   <div class="row">
     <div class="col-md-4">
       <h2>Solves world hunger</h2>
@@ -23,3 +41,11 @@
       <p>Blocipedia will make you better looking: it's scientifically proven to make men look like Ryan Gosling and women look like Shakira.</p>
     </div>
   </div>
+<br>
+  <% if user_is_standard_or_upgrading_member %>
+    <div class="jumbotron text-center">
+      <h2 class="text-center">Upgrade to a Premium membership and create private wikis.</h2>
+      <br>
+      <%= link_to "Upgrade", new_charge_path, :class => "btn-lg btn btn-primary"  %>
+    </div>
+  <% end %>
