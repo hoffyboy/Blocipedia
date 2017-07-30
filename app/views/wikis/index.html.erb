@@ -3,16 +3,23 @@
 <div class="row">
   <div class="col-md-8">
     <% @wikis.each do |wiki| %>
-      <div class="media">
-        <div class="media-body">
-          <h4 class="media-heading">
-            <%= link_to wiki.title, wiki %>
-          </h4>
-          <small>
-            submitted <%= time_ago_in_words(wiki.created_at) %> ago
-          </small>
+      <% if user_is_authorized_for_private_wikis(wiki) %>
+        <div class="media">
+          <div class="media-body">
+            <h4 class="media-heading">
+              <%= link_to wiki.title, wiki %>
+            </h4>
+            <small>
+              submitted <%= time_ago_in_words(wiki.created_at) %> ago |
+              <% if wiki.private %>
+                private
+              <% else %>
+                public
+              <% end %>
+            </small>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
   <br >

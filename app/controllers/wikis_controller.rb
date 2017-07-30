@@ -1,6 +1,7 @@
 class WikisController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :user_is_admin_or_wiki_owner?, only: :destroy
+  before_action :user_is_authorized_for_private_wikis?, only: :show
 
   def index
     @wikis = Wiki.all
@@ -69,5 +70,13 @@ class WikisController < ApplicationController
       flash[:alert] = "You must be an admin to do that."
       redirect_to wikis_path
     end
+  end
+
+   def user_is_authorized_for_private_wikis?
+     wiki = Wiki.find(params[:id])
+     unless wiki.private == false || current_user && (current_user.premium? || current_user.admin?)
+       flash[:alert] = "You are unauthorized to see private wikis."
+       redirect_to wikis_path
+     end
   end
 end

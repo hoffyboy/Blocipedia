@@ -75,10 +75,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def downgrade_user
     current_user.role = 'standard'
-    # current_user.save
+
 
     if current_user.save
-      flash[:notice] = "You have successfully downgraded your membership to standard. You will not be billed anymore."
+      current_user.wikis.each do |wiki|
+        wiki.private = false
+        wiki.save
+      end
+      flash[:notice] = "You have successfully downgraded to a standard membership. All your private wikis are now public."
       redirect_to root_path
     else
       flash.now[:alert] = "There was an error changing your membership. Please try again."
