@@ -38,7 +38,7 @@ admin = User.create!(
 50.times do
   wiki = Wiki.create!(
     title: Faker::Lorem.sentence,
-    body: Faker::Lorem.paragraph(10..80),
+    body: Faker::Lorem.paragraph(10..30) + "\n\n" + Faker::Markdown.random + "\n\n" + Faker::Lorem.paragraph(10..30) + "\n\n" + Faker::Markdown.random + "\n\n" + Faker::Lorem.paragraph(10..20),
     private: [false, true, false].sample,
     user: User.all.sample
   )

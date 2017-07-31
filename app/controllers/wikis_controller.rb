@@ -2,6 +2,7 @@ class WikisController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :user_is_admin_or_wiki_owner?, only: :destroy
   before_action :user_is_authorized_for_private_wikis?, only: :show
+  require 'redcarpet/compat'
 
   def index
     @wikis = Wiki.all
