@@ -70,7 +70,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # raise current_user.inspect
     puts current_user.inspect
 
-    current_user.role == 'upgrade_to_premium' ? new_charge_path : about_path
+    current_user.role == 'upgrading' ? new_charge_path : root_path
   end
 
   def downgrade_user

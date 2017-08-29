@@ -8,15 +8,36 @@
       <%= f.label :body %>
       <%= f.text_area :body, placeholder: "Enter wiki body", class: 'form-control', rows: 8 %>
     </div>
-    <% if current_user.admin? || current_user.premium? %>
-      <div class="form-group">
-        <%= f.label :private, class: 'checkbox' do %>
-          <%= f.check_box :private %> Private wiki
+    <% if current_user.admin? || (current_user.premium? && current_user == @wiki.user || !@wiki.user) %>
+      <div class="form-group checkbox">
+        <%= f.label :private do %>
+          <%= f.check_box :private %> Private
         <% end %>
       </div>
     <% end %>
     <div class="form-group">
       <%= f.submit "Save", class: "btn btn-success" %>
     </div>
+    <% if user_is_admin_or_wiki_owner(@wiki) %>
+      <%= render partial: 'collaborators/collaborators' %>
+    <% end %>
   <% end %>
 </div>
+
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    if(!$('#wiki_private').is(':checked')) {
+      $('#collaborators').hide();
+    }
+
+    $('#wiki_private').change(function() {
+      console.log($(this).is(':checked'));
+      $.ajax({
+        url: $('.edit_wiki').attr('action'),
+        type: 'PUT',
+        data: {wiki: {private: $(this).is(':checked')}}
+      })
+    });
+  });
+</script>

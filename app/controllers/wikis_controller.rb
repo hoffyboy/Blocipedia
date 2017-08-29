@@ -1,11 +1,11 @@
 class WikisController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :user_is_admin_or_wiki_owner?, only: :destroy
-  before_action :user_is_authorized_for_private_wikis?, only: :show
+  before_action :user_is_authorized_for_private_wikis?, only: [:show, :edit]
   require 'redcarpet/compat'
 
   def index
-    @wikis = Wiki.all
+    @wikis = policy_scope(Wiki)
   end
 
   def show
@@ -31,15 +31,18 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    @users = User.all
   end
 
   def update
     @wiki = Wiki.find(params[:id])
     @wiki.assign_attributes(wiki_params)
-
     if @wiki.save
-      flash[:notice] = "Wiki was updated."
-      redirect_to @wiki
+      flash.now[:notice] = "Wiki was updated."
+      respond_to do |format|
+        format.js { render layout: false }
+        format.html { redirect_to @wiki }
+      end
     else
       flash.now[:alert] = "There was an error saving the wiki. Please try again."
       render :edit
@@ -74,10 +77,13 @@ class WikisController < ApplicationController
   end
 
    def user_is_authorized_for_private_wikis?
-     wiki = Wiki.find(params[:id])
-     unless wiki.private == false || current_user && (current_user.premium? || current_user.admin?)
-       flash[:alert] = "You are unauthorized to see private wikis."
-       redirect_to wikis_path
-     end
+    wiki = Wiki.find(params[:id])
+    unless (wiki.private == false ||
+    current_user.try(:admin?) ||
+    wiki.collaborators.find_by(user_id: current_user.try(:id)) ||
+    current_user == wiki.user)
+      flash[:alert] = "You are unauthorized to see private wikis."
+      redirect_to wikis_path
+    end
   end
 end

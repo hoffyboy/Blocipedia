@@ -1,0 +1,5 @@
+<% if @wiki.private? %>
+  $('#collaborators').show();
+<% else %>
+  $('#collaborators').hide();
+<% end %>

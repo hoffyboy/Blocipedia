@@ -3,7 +3,7 @@ module WikisHelper
     current_user && (current_user == wiki.user || current_user.admin?)
   end
 
-  def user_is_authorized_for_private_wikis(wiki)
-    wiki.private == false || current_user && (current_user.premium? || current_user.admin?)
+  def user_is_admin_or_wiki_owner(wiki)
+    current_user.admin? || current_user == wiki.user
   end
 end

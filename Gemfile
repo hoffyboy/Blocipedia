@@ -54,3 +54,5 @@ source 'https://rubygems.org'
  gem 'stripe'
 
  gem 'redcarpet'
+
+ gem 'pundit'

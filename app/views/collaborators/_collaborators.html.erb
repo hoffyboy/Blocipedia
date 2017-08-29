@@ -1,0 +1,26 @@
+<br>
+<div id="collaborators" class="form-group">
+  <h2>Collaborators</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Collaborate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <% unless current_user == user || user.admin? || @wiki.user == user %>
+          <tr>
+            <td><%= user.email %></td>
+            <% if @wiki.collaborators.where(user_id: user.id).first %>
+              <td><%= link_to "Remove", wiki_collaborator_path(@wiki, user_id: user.id), method: :delete %></td>
+            <% else %>
+              <td><%= link_to "Add", wiki_collaborators_path(@wiki, user_id: user.id), method: :post %></td>
+            <% end %>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
