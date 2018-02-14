@@ -18,7 +18,7 @@
     <div class="form-group">
       <%= f.submit "Save", class: "btn btn-success" %>
     </div>
-    <% if user_is_admin_or_wiki_owner(@wiki) %>
+    <% if @users and user_is_admin_or_wiki_owner(@wiki) %>
       <%= render partial: 'collaborators/collaborators' %>
     <% end %>
   <% end %>
