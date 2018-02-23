@@ -8,6 +8,6 @@ class CreateWikis < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-    add_index :wikis, :user
+    add_index :wikis, :user_id
   end
 end
