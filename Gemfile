@@ -47,9 +47,10 @@ source 'https://rubygems.org'
  group :development, :test do
    gem 'rspec-rails', '~> 3.5'
    gem 'factory_girl_rails', '~> 4.0'
-   gem 'faker'
- end
 
+ end
+ 
+ gem 'faker'
  gem 'figaro', '1.0'
 
  gem 'stripe'
