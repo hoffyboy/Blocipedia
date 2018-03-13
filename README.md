@@ -23,6 +23,7 @@ This app was created for educational purposes.
 **Setup:**
 + Environment variables were set using Figaro and are stored in config/application.yml (ignored by git).
 + The config/application.example.yml file illustrates how environment variables should be stored.
+
 **To run Wiki-it locally:**
 + Clone the repository
 + Run bundle install
