@@ -1,8 +1,13 @@
 # Wiki-it
 Wiki-it is a Ruby on Rails application that allows users to create wikis and collaborate on other wikis. Users can pay to upgrade their membership, allowing them to view and create private wikis.
+
+
+The app is deployed on Heroku: https://wikiit.herokuapp.com
+
+
 The source code is here on GitHub: https://github.com/hoffyboy/wiki-it
 
-This app was created for educational purposes.
+This app was created as part of the Bloc Full Stack Web Development course.
 
 # Features
 + Users can create a standard account in order to create, edit, and collaborate on public wikis using Markdown syntax. Anyone can view public wikis.
@@ -13,13 +18,13 @@ This app was created for educational purposes.
 # Setup and Configuration
 
 
-**Languages and Frameworks**: Ruby on Rails and Bootstrap
+**Languages and Frameworks:** Ruby on Rails and Bootstrap
 
 
-**Ruby version 2.3.0**
+**Ruby version:** 2.4.1
 
 
-**Databases**: SQLite (Test, Development), PostgreSQL (Production)
+**Databases:** SQLite (Test, Development), PostgreSQL (Production)
 
 
 **Development Tools and Gems include:**
