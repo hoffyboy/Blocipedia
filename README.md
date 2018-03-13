@@ -11,10 +11,20 @@ This app was created for educational purposes.
 + Premium users can downgrade their account back to Standard.
 + When a user downgrades his or her account, his or her private wikis will automatically become public.
 # Setup and Configuration
+
+
 **Languages and Frameworks**: Ruby on Rails and Bootstrap
+
+
 **Ruby version 2.3.0**
+
+
 **Databases**: SQLite (Test, Development), PostgreSQL (Production)
-**Development Tools and Gems include**:
+
+
+**Development Tools and Gems include:**
+
+
 + Devise for user authentication
 + SendGrid for email confirmation
 + Redcarpet for Markdown formatting
