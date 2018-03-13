@@ -2,7 +2,7 @@
 Wiki-it is a Ruby on Rails application that allows users to create wikis and collaborate on other wikis. Users can pay to upgrade their membership, allowing them to view and create private wikis.
 The source code is here on GitHub: https://github.com/hoffyboy/wiki-it
 
-This app was created for educational purposes
+This app was created for educational purposes.
 
 # Features
 + Users can create a standard account in order to create, edit, and collaborate on public wikis using Markdown syntax. Anyone can view public wikis.
