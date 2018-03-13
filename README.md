@@ -20,6 +20,7 @@ This app was created for educational purposes.
 + Redcarpet for Markdown formatting
 + Pundit for authorization
 + Stripe for payments
+
 **Setup:**
 + Environment variables were set using Figaro and are stored in config/application.yml (ignored by git).
 + The config/application.example.yml file illustrates how environment variables should be stored.
